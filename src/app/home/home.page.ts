@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Plugins } from '@capacitor/core';
 
+const { Clipboard } = Plugins;
 
 @Component({
   selector: 'app-home',
@@ -21,4 +23,10 @@ export class HomePage {
          this.entries = entries;
        })
      }
+
+      async copy(name: string, text: string){
+        Clipboard.write({
+          string:  name + ' is ' + text
+        });
+      }
 }
