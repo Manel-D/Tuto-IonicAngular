@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,16 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
-
+  API_URL = "https://media.jscrambler.com/blog/data.json";
+     entries: Array<any>;
+     constructor(private httpClient: HttpClient){
+     }
+     ionViewDidEnter(){
+       this.getData();
+     }
+     getData(){
+       this.httpClient.get(this.API_URL).subscribe((entries: any[])=>{
+         this.entries = entries;
+       })
+     }
 }
